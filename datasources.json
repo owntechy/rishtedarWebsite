@@ -1,0 +1,51 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongoDB": {
+    "url": "mongodb://localhost:27017/rishtadar",
+    "name": "mongoDB",
+    "useNewUrlParser": true,
+    "connector": "mongodb"
+  },
+  "mongoDBStorage": {
+    "name": "mongoDB",
+    "connector": "mongodb",
+    "url":"mongodb+srv://doadmin:0a76m25du8gnz9i4@db-mongodb-blr1-95134-0d81563b.mongo.ondigitalocean.com/admin?tls=true&authsource=admin&replicaset=db-mongodb-blr1-95134&tlscafile=./ca-certificate.crt",
+    "auto_reconnect": true,
+    "useUnifiedTopology":true,
+    "connectionTimeoutMS": 1000000,
+    "socketTimeoutMS": 1000000,
+    "strictObjectIDCoercion": true
+  },
+  "smsService": {
+    "name": "smsService",
+    "headers": {
+      "accepts": "application/json",
+      "content-type": "application/json"
+    },
+    "crud": false,
+    "connector": "rest",
+    "operations": [
+      {
+        "template": {
+          "method": "GET",
+          "url": "http://sms.jaipursmshub.in/api_v2/message/send?api_key=uJXTLH2O_xV_r5utjRB0SEW8rrLBSy9APxqM_sB-KL7bR-_bL8vULpQtBdBMZWKC&sender_id=MTGPSA&dlt_template_id={dlt_template_id}",
+          "query": {
+            "mobile_no": "{mobile_no}",
+            "message": "{message}"
+          }
+        },
+        "functions": {
+          "sendSMS": [
+            "mobile_no",
+            "message",
+            "dlt_template_id"
+          ]
+        }
+      }
+    ]
+  }
+ 
+}
